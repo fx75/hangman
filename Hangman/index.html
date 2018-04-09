@@ -1,0 +1,132 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hänga gubbe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="Content/bootstrap.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/tonystar/bootstrap-float-label/v4.0.0/dist/bootstrap-float-label.min.css" />
+    <link href="Content/hangman.css" rel="stylesheet" />
+    <link href="Content/jquery.sweet-modal.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-inverse" id="main-navbar">
+        <div class="pull-right gameLinks">
+            <span><a href="#" data-bind="click:action_newGame">Nytt spel</a></span>
+        </div>
+        <div class="container" id="main-container">
+            <div id="main-navbar-links">
+                <h1 class="pull-left">Hänga Gubbe</h1>
+                <div class="h4 pull-left">by Felix</div>
+            </div>
+        </div>
+    </div>
+        <div id="panelContainer" class="tab-content">
+            <div id="mainPanel" data-bind="visible: createNewGame">
+                <div>
+                    <div class="row" style="padding-bottom: 15px;">
+                        <div class="col-md-12">
+                            <div class="col-md-1">
+                               
+                            </div>
+                            <div class="col-md-9">
+                                <div class="input-group input-group-lg has-float-label">
+                                    <input type="text" id="newWord" data-bind="textInput : word, event: {keypress: onNewGame}" class="form-control" placeholder="Nytt ord" />
+                                    <label for="newWord">Nytt ord</label>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary" data-bind="click:action_createNewGame, enable:wordCount()>0">
+                                            <span class="glyphicon glyphicon-play"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-1">
+                               
+                            </div>
+                            <div class="col-md-9">
+                                <div>
+                                    <label for="newWord">Spelet väljer ord</label>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary" data-bind="click:action_slumper">
+                                            <span class="glyphicon glyphicon-random"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="gamePanel" data-bind="visible: showNewGame">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-1">
+                            <!--<label style="text-decoration: none">Gissa bokstav</label>-->
+                        </div>
+                        <div class="col-md-9">
+                            <div class="input-group input-group-lg has-float-label">
+                                <input type="text" id="guessWord" data-bind="textInput: letterGuess, event: {keypress: onGuess}" class="form-control" placeholder="Gissa bokstav" />
+                                <label for="guessWord">Gissa bokstav</label>
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary" data-bind="click:action_guessLetter, enable:wrongGuessCount()<gameover()">
+                                        <span class="glyphicon glyphicon-play-circle"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <br />
+                            Felgissningar:
+                            <div data-bind="foreach: wrongGuesses()">
+                                <span data-bind="text:$data" style="font-weight: bold; font-size: 14px; color: red"></span>
+                            </div>
+                            <br /><span data-bind="text:wrongGuessCount()"></span> av <span data-bind="text:gameover()"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="background-color: #f7b334;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-1">
+                                <!--<label style="text-decoration: none">Låt spelet börja</label>-->
+                            </div>
+                            <div class="col-md-9 game2">
+                                <!--<label style="text-decoration: none">Låt spelet börja</label>-->
+                                <div data-bind="foreach: ongoingGameChars()">
+                                    <!-- ko if: (!$data.showreal) -->
+                                    <span data-bind="text:$data.masked" class="gameBoard"></span>
+                                    <!-- /ko -->
+                                    <!-- ko if: ($data.showreal) -->
+                                    <span data-bind="text:$data.realchar" class="gameBoard"></span>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <script src="Scripts/jquery-3.2.1.js"></script>
+        <script src="Scripts/fetch.js"></script>
+        <script src="Scripts/jquery.sweet-modal.js"></script>
+        <script src="Scripts/bootstrap.js"></script>
+        <script src="Scripts/knockout-3.4.2.js"></script>
+        <script src="Scripts/lodash.js"></script>
+        <script src="app/hangman.js" charset="utf-8"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var hangmanViewModel = new HangmanViewModel();
+                ko.applyBindings(hangmanViewModel);
+            });
+        </script>
+</body>
+</html>
+

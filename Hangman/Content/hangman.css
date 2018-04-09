@@ -1,0 +1,174 @@
+﻿/*:root {
+    --button-color: #000000;
+    --button-background-color: silver;
+}*/
+
+body {
+    font-size: 16px;
+}
+
+/* */
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-control-placeholder {
+    position: absolute;
+    top: 0;
+    padding: 7px 0 0 13px;
+    transition: all 200ms;
+    opacity: 0.5;
+}
+
+.form-control:focus + .form-control-placeholder,
+.form-control:valid + .form-control-placeholder {
+    font-size: 75%;
+    transform: translate3d(0, -100%, 0);
+    opacity: 1;
+}
+
+/* */
+
+#mainPanel {
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 15px;
+    width: 400px;
+}
+
+#gamePanel {
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 15px;
+}
+
+
+.btn-primary {
+    background-color: #000000 !important;
+    border: none;
+}
+
+    .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+        background-color: #337ab7 !important;
+    }
+
+input[disabled].btn-primary, input[disabled].btn-primary:hover, input[disabled].btn-primary:active, input[disabled].btn-primary:focus {
+    color: #ccc;
+    background-color: #878787 !important;
+    border: none;
+}
+
+input[disabled].btn-primary {
+    background: #878787 !important;
+    color: #ccc;
+}
+
+.div-buttons:hover,
+.div-buttons:hover .glyphicon {
+    color: #f7b334;
+    cursor: pointer;
+}
+
+.gameLinks {
+    margin: 36px 20px 0 0;
+}
+
+.gameBoard {
+    font-size: 24px !important;
+}
+
+.game2 {
+    text-align: center !important;
+}
+
+#main-navbar a {
+    color: orange;
+}
+#main-navbar {
+    margin-bottom: 0px;
+    margin-left: 0px;
+    background-color: #000000;
+    /*border-color: #d6001c;*/
+    color: #ffffff;
+}
+
+#main-container {
+    margin: 0px;
+}
+
+#main-navbar-links h1 {
+    margin-left: 0;
+}
+
+#main-navbar-links .h4 {
+    margin: 36px 0 0 10px;
+}
+
+#main-navbar-links {
+    float: left;
+    margin-right: 15px;
+    margin-left: 0;
+}
+
+.divdesign {
+    padding-bottom: 15px;
+}
+
+@media only screen and (min-device-width : 375px) and (max-device-width : 667px) and (width : 667px) and (height : 375px) and (orientation : landscape) {
+    .navbar{}
+    #main-navbar {
+        background-color: #a00000;
+    }
+}
+/*@media only screen and (min-device-width : 375px) and (max-device-width : 667px) and (width : 375px) and (height : 559px) and (orientation : portrait) {
+    .navbar {
+    }
+    #main-navbar {
+        background-color: red;
+    }
+}*/
+
+@media only screen and (min-device-width : 375px) and (max-device-width : 667px) and (orientation : portrait) {
+    .navbar {
+        max-height: 35px;
+    }
+
+    #main-navbar {
+        background-color: #000a00;
+    }
+    h1 {
+        font-size: 19px;
+        margin-top: 13px;
+    }
+    h4 {
+        font-size: 13px;
+    }
+    body {
+        font-size: 13px;
+    }
+    #main-navbar-links .h4 {
+        margin: 17px 0 0 10px;
+    }
+    .gameLinks {
+        margin: 26px 20px 0 0;
+    }
+}
+
+@media only screen and (max-width : 340px) {
+    #main-navbar {
+        background-color: #000a00;
+    }
+    h1 {
+        font-size: 17px;
+        margin-top: 13px;
+    }
+
+    h4 {
+        font-size: 12px;
+    }
+
+    .gameLinks {
+        margin: 26px 20px 0 0;
+    }
+}
