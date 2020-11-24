@@ -9,6 +9,7 @@
     this.gameover = ko.observable(10);
     this.ongoingGameChars = ko.observableArray();
     this.wrongGuesses = ko.observableArray();
+    this.congratsMessage = ko.observable("");
     this.wordCount = ko.computed(function () {
         return that.word().length;
     });
@@ -16,8 +17,27 @@
         return that.wrongGuesses().length;
     });
 
+    var allowedInput = function(length, regex) {
+        return {
+          init: function(element, valueAccessor, allBindingsAccessor, bindingContext) {
+            ko.bindingHandlers.textInput.init(element, valueAccessor, allBindingsAccessor, bindingContext);
+          },
+
+          update: function(element, valueAccessor) {
+            var value = ko.unwrap(valueAccessor());
+            if (value.length >= length || !regex.test(value.slice(-1))) {
+              valueAccessor()(value.slice(0, -1));
+            }
+          }
+        }
+      };
+
+    ko.bindingHandlers.alphaNumInput =
+         allowedInput(30, new RegExp("^[a-öA-Ö\b]+$"));
+    ko.bindingHandlers.alphaNumInputGuess =
+ 		allowedInput(2, new RegExp("^[a-öA-Ö\b]+$"));
+
     //TODO: Hitta alfabets-ikoner och "dash"-ikon (problem....åäö! Deal with it)
-    //TODO: skelett när man misslyckas!
 
     var resetGame = function () {
         that.wrongGuesses([]);
@@ -43,6 +63,13 @@
         $.getJSON("app/ord.json", function (data) {
             var randomWord = data[Math.floor(Math.random() * data.length)];
             newGame(randomWord);
+        });
+    }
+
+    this.congratz_slumper = function () {
+        $.getJSON("app/grattis.json", function (data) {
+            var randomWord = data[Math.floor(Math.random() * data.length)];
+            that.congratsMessage(randomWord);
         });
     }
 
@@ -93,7 +120,7 @@
             var correctGuesses = _.size(_.filter(that.ongoingGameChars(), function (c) { return c.showreal }));
             if (that.gameChars().length === correctGuesses) {
                 $.sweetModal({
-                    content: "Tjohooo!! Grattis!",
+                    content: that.congratsMessage(),
                     //icon: $.sweetModal.ICON_SUCCESS,
                     icon: $.sweetModal.ICON_BALLOON,
                     buttons: {
@@ -107,11 +134,11 @@
                     }
                 });
             }
-            
+
             if (that.wrongGuessCount() === that.gameover()) {
                 $.sweetModal({
                     content: "Åh neeeeeeeej!<br>Korrekt ord var: " + that.gamwWord().toUpperCase(),
-                    icon: $.sweetModal.ICON_ERROR,
+                    icon: $.sweetModal.ICON_SKULL,
                     buttons: {
                         button1: {
                             label: "Spela igen?",
@@ -128,6 +155,7 @@
 
     this.onGuess = function (d, e) {
         e.keyCode === 13 && that.action_guessLetter();
+        this.congratz_slumper();
         return true;
     };
     this.onNewGame = function (d, e) {

@@ -162,6 +162,9 @@ SweetModal = (function() {
           case $.sweetModal.ICON_BALLOON:
               this.params.content = templates.icons.balloon + this.params.content;
               break;
+          case $.sweetModal.ICON_SKULL:
+                this.params.content = templates.icons.skull + this.params.content;
+                break;
           case $.sweetModal.ICON_ERROR:
             this.params.content = templates.icons.error + this.params.content;
             break;
@@ -739,6 +742,7 @@ module.exports = {
   $.sweetModal.TYPE_MODAL = 'modal';
   $.sweetModal.ICON_SUCCESS = 'success';
   $.sweetModal.ICON_BALLOON = 'balloon';
+  $.sweetModal.ICON_SKULL = 'skull';
   $.sweetModal.ICON_ERROR = 'error';
   return $.sweetModal.ICON_WARNING = 'warning';
 })(jQuery);
@@ -760,7 +764,8 @@ module.exports = {
     warning: "<div class=\"sweet-modal-icon sweet-modal-warning\">\n	<span class=\"sweet-modal-body\"></span>\n	<span class=\"sweet-modal-dot\"></span>\n</div>",
     info: "<div class=\"sweet-modal-icon sweet-modal-info\"></div>",
     success: "<div class=\"sweet-modal-icon sweet-modal-success\">\n	<span class=\"sweet-modal-line sweet-modal-tip\"></span>\n	<span class=\"sweet-modal-line sweet-modal-long\"></span>\n	<div class=\"sweet-modal-placeholder\"></div>\n	<div class=\"sweet-modal-fix\"></div>\n</div>",
-    balloon: "<div class=\"sweet-modal-icon sweet-modal-balloon\">\n	<span class=\"sweet-modal-line sweet-modal-tip\"></span>\n	<span class=\"sweet-modal-line sweet-modal-long\"></span>\n	<div class=\"sweet-modal-placeholder\"></div>\n	<div class=\"sweet-modal-fix\"></div>\n</div>"
+    balloon: "<div class=\"sweet-modal-icon sweet-modal-balloon\">\n	<span class=\"sweet-modal-line sweet-modal-tip\"></span>\n	<span class=\"sweet-modal-line sweet-modal-long\"></span>\n	<div class=\"sweet-modal-placeholder\"></div>\n	<div class=\"sweet-modal-fix\"></div>\n</div>",
+    skull: "<div class=\"sweet-modal-icon sweet-modal-skull\">\n	<span class=\"sweet-modal-line sweet-modal-tip\"></span>\n	<span class=\"sweet-modal-line sweet-modal-long\"></span>\n	<div class=\"sweet-modal-placeholder\"></div>\n	<div class=\"sweet-modal-fix\"></div>\n</div>"
   },
   prompt: "<div class=\"sweet-modal-prompt\">\n	<input type=\"{TYPE}\" placeholder=\"{PLACEHOLDER}\" value=\"{VALUE}\" />\n</div>",
   prepare: function(tpl, strings) {

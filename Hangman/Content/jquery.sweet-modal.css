@@ -1043,6 +1043,13 @@
         height: 100px;
         background-image: url('images/balloons_icon.png');
     }
+    .sweet-modal-icon.sweet-modal-skull {
+      background-size: cover;
+      border: none;
+      width: 100px;
+      height: 100px;
+      background-image: url('images/skull.png');
+  }
 
   .sweet-modal-icon.sweet-modal-success {
     border-color: #B7D968; }
